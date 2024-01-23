@@ -21,3 +21,32 @@ O sistema deve permitir realizar três saques diários com limite máxio de R$ 5
 Essa operação deve listar todos os depósitos e saques realizados na conta. No fim da listagem deve ser exibido o saldo atual da conta.
 Os valores devem ser exibidos utilizando o formato R$ XXX.XX, exemplo:
 1500.45 = R$ 1500.45
+
+~~~
+menu = """
+[d] Depositar
+[s] Sacar
+[e] Extrato
+[q] Sair
+
+=>"""
+
+saldo = 0
+limite = 500
+extrato = ""
+numero_saques = 0
+LIMITE_SAQUES = 3
+while True:
+  opcao = input(menu)
+  if opcao == 'd':
+    print("Depósito")
+  elif opcao == 's':
+    print("Saque")
+  if opcao == 'e':
+    print("Extrato")
+  if opcao == 'q':
+    break
+  else:
+    print("Operação inválida, por favor selecione novamente a operação desejada.")
+print("Obrigado e volte sempre!!")
+~~~
