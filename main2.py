@@ -1,3 +1,5 @@
+from operacoes import depositar
+
 menu = """
 ===============MENU===============
     [d] Depositar
@@ -11,15 +13,6 @@ menu = """
 =>"""
 
 print(menu)
-
-def depositar(valor, extrato, saldo, /): #tudo que está antes do / significa que os argumentos tem que ser passados por posição
-    if valor > 0:
-        saldo += valor
-        extrato += f"\n\nDepósito:\tR$ {valor:.2f}\n"
-        print(f"Depósito realizado com sucesso! ==")
-    else:
-        print("\n@@@ Operação falhou! O valor informado é invalido. @@@")
-    return saldo, extrato
 
 def sacar(*, saldo, valor, extrato, limite, numeros_saques, limite_saques):# todos os parâmetros após * terão que ser passado nomeado
     excedeu_saldo = valor > saldo
@@ -109,7 +102,12 @@ while True:
 
     if opcao == 'd':
         valor = float(input("Informe o valor a ser depositado: R$ "))
-        depositar(valor, extrato, saldo)
+        saldo_anterior = saldo
+        saldo, extrato = depositar(valor, extrato, saldo)
+        if saldo > saldo_anterior:
+            print("Depósito realizado com sucesso!")
+        else:
+            print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
     elif opcao == 's':
         valor = float(input("Informe o valor do saque: R$ "))
         sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, limite_saques=LIMITE_SAQUE, numeros_saques=numeros_saques)
