@@ -1,6 +1,7 @@
 import unittest
 from operacoes import depositar
 
+
 class TestDepositar(unittest.TestCase):
     def test_deposito_positivo_atualiza_saldo_e_extrato(self):
         saldo, extrato = depositar(100, "", 0)
@@ -25,6 +26,7 @@ class TestDepositar(unittest.TestCase):
 
         self.assertEqual(saldo, saldo_inicial)
         self.assertEqual(extrato, extrato_inicial)
+
 
 if __name__ == "__main__":
     unittest.main()
