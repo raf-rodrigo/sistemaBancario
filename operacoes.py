@@ -5,7 +5,16 @@ def depositar(valor, extrato, saldo, /):
     return saldo, extrato
 
 
-def sacar(*, saldo, valor, extrato, limite, numeros_saques, limite_saques):# todos os parâmetros após * terão que ser passado nomeado
+def sacar(
+    *,
+    saldo,
+    valor,
+    extrato,
+    limite,
+    numeros_saques,
+    limite_saques,
+):
+    # todos os parâmetros após * terão que ser passado nomeado
     excedeu_saldo = valor > saldo
     excedeu_limite = valor > limite
     excedeu_saques = numeros_saques >= limite_saques
