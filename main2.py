@@ -1,4 +1,4 @@
-from operacoes import depositar
+from operacoes import depositar, sacar
 
 menu = """
 ===============MENU===============
@@ -14,30 +14,6 @@ menu = """
 
 print(menu)
 
-def sacar(*, saldo, valor, extrato, limite, numeros_saques, limite_saques):# todos os parâmetros após * terão que ser passado nomeado
-    excedeu_saldo = valor > saldo
-    excedeu_limite = valor > limite
-    excedeu_saques = numeros_saques >= LIMITE_SAQUE
-
-    if excedeu_saldo:
-        print("\n@@@ Operação falhou! Você não tem saldo sificiente. @@@")
-
-    elif excedeu_limite:
-        print('\n@@@ Operação falhou! O valor do saque excede o limite. @@@')
-
-    elif excedeu_saques:
-        print("\n@@@ Operação falhou! Número máximo de saques excedido. @@@")
-
-    elif valor > 0:
-        saldo -= valor
-        extrato += f"Saque:\t\tR$ {valor:.2f}\n"
-        numeros_saques += 1
-        print("\n=== Saque realizado com sucesso ! ===")
-
-    else:
-        print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
-
-    return saldo, extrato
 
 def exibir_extrato(saldo, /, *, extrato):
     print("\n================ Extrato ================")
@@ -110,7 +86,15 @@ while True:
             print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
     elif opcao == 's':
         valor = float(input("Informe o valor do saque: R$ "))
-        sacar(saldo=saldo, valor=valor, extrato=extrato, limite=limite, limite_saques=LIMITE_SAQUE, numeros_saques=numeros_saques)
+        saldo, extrato, numeros_saques, mensagem = sacar(
+            saldo=saldo,
+            valor=valor,
+            extrato=extrato,
+            limite=limite,
+            limite_saques=LIMITE_SAQUE,
+            numeros_saques=numeros_saques
+        )
+        print(mensagem)
 
     elif opcao == 'e':
       exibir_extrato(saldo, extrato=extrato)
