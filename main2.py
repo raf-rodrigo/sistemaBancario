@@ -1,4 +1,4 @@
-from operacoes import depositar, sacar
+from operacoes import depositar, formatar_extrato, sacar
 
 menu = """
 ===============MENU===============
@@ -13,13 +13,6 @@ menu = """
 =>"""
 
 print(menu)
-
-
-def exibir_extrato(saldo, /, *, extrato):
-    print("\n================ Extrato ================")
-    print('Não foram realizadas movimentações.' if not extrato else extrato)
-    print(f"\nSaldo: R$ {saldo:.2f}")
-    print("===========================================")
 
 
 def criar_usuario(usuarios):
@@ -95,13 +88,11 @@ while True:
             numeros_saques=numeros_saques
         )
         print(mensagem)
-
     elif opcao == 'e':
-      exibir_extrato(saldo, extrato=extrato)
-
+        texto_extrato = formatar_extrato(saldo=saldo, extrato=extrato)
+        print(texto_extrato)
     elif opcao == 'nu':
         criar_usuario(usuarios)
-
     elif opcao == 'nc':
         numero_conta = len(contas) + 1
         conta = criar_conta(NUMERO_AGENCIA, numero_conta, usuarios)

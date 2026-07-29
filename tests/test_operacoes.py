@@ -1,5 +1,5 @@
 import unittest
-from operacoes import depositar, sacar
+from operacoes import depositar, formatar_extrato, sacar
 
 
 class TestDepositar(unittest.TestCase):
@@ -119,6 +119,23 @@ class TestSacar(unittest.TestCase):
         self.assertEqual(extrato, extrato_inicial)
         self.assertEqual(numeros_saques, saques_iniciais)
         self.assertIn("inválido", mensagem)
+
+
+class TestFormatarExtrato(unittest.TestCase):
+    def test_extrato_vazio_informa_ausencia_de_movimentacao(self):
+        resultado = formatar_extrato(saldo=0, extrato="")
+
+        self.assertIn('Não foram realizadas movimentações', resultado)
+        self.assertIn('Saldo: R$ 0.00', resultado)
+
+    def test_extrato_com_movimentacoes_exibe_historico_e_saldo(self):
+        extrato = "Depósito: R$ 100.00\nSaque: R$ 40.00"
+        resultado = formatar_extrato(saldo=60, extrato=extrato)
+
+        self.assertIn('Depósito: R$ 100.00', resultado)
+        self.assertIn('Saque: R$ 40.00', resultado)
+        self.assertIn('Saldo: R$ 60.00', resultado)
+        self.assertNotIn('Não foram realizadas movimentações', resultado)
 
 
 if __name__ == "__main__":
