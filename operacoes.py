@@ -38,3 +38,18 @@ def sacar(
         mensagem = "\n@@@ Operação falhou! O valor informado é inválido. @@@"
 
     return saldo, extrato, numeros_saques, mensagem
+
+
+def formatar_extrato(
+    *,
+    saldo,
+    extrato,
+):
+    movimentacoes = extrato.strip() or "Não foram realizadas movimentações."
+
+    return (
+        "\n================ Extrato ================\n"
+        f"{movimentacoes}"
+        f"\n\nSaldo: R$ {saldo:.2f}\n"
+        "============================================"
+    )
